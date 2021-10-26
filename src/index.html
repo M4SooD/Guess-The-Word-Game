@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess The Word!</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <div class="pages start__page" id="page--1">
+      <h1 class="game__name">GUESS THE WORD!</h1>
+      <p class="Choose__name">Your Name is...</p>
+      <input type="text" class="name__input" />
+      <p>Select Game Difficulty</p>
+      <button class="btn btn__difficulty" id="btn--easy">Easy</button>
+      <button class="btn btn__difficulty" id="btn--medium">Medium</button>
+      <button class="btn btn__difficulty" id="btn--hard">Hard</button>
+      <button class="btn btn__difficulty" id="btn--devil">Devil</button>
+    </div>
+
+    <div class="pages overview__page" id="page--2">
+      <p class="countdown__timer overview__timer" id="timer">Timer</p>
+      <p class="random__words">Words will display here</p>
+      <button class="btn btn__restart">Get Back To Start</button>
+    </div>
+    <div class="pages play__page" id="page--3">
+      <p class="countdown__timer play__timer" id="timer">Timer</p>
+      <p class="random__words random__words--play" id="random">correct the words</p>
+      <button class="btn btn__restart">Get Back To Start</button>
+    </div>
+
+    <div class="pages en__page" id="page--4">
+      <p class="countdown__timer overview__timer" id="timer">Timer</p>
+      <button class="btn btn__restart">Get Back To Start</button>
+    </div>
+  </body>
+</html>
