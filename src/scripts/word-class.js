@@ -1,18 +1,27 @@
+const words=['ameneh','masoud','Hello'];
 class Word {
-    #correct;
-    #withHidden;
-    #userEntered;
-
+    #word;
+    
     constructor(level) {
         this.level = level;
+        this.#word['correct']=words[Math.floor(Math.random()*words.length)];
+        if(level ==="Hard"){
+            randomHide(correct(),9);
+        }
+    }
+    get correct(){
+        return correct;
     }
 
-    get word() {
-        return this.#correct;
+    randomHide([...correct],num) {
+      
     }
 
-    randomHide() {
+    userTry([...char]){
 
     }
 }
+
+let myWord = new Word('Hard');
+console.log( myWord.correct());
 module.exports = Word;
