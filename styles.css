@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  color: rgb(204, 17, 17);
+  line-height: 1.9;
+  background-color: #3c0372;
+}
+
+.btn {
+  display: inline-block;
+  background-color: orangered;
+  font-size: 1.6rem;
+  font-family: inherit;
+  font-weight: 500;
+  border: none;
+  padding: 1.25rem 4.5rem;
+  border-radius: 10rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+p {
+  font-size: medium;
+}
+
+.name__input {
+  background-color: palegoldenrod;
+}
+
+.play__page--top {
+  display: flex;
+  align-content: space-between;
+}
