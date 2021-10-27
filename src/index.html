@@ -12,7 +12,7 @@
       <h1 class="game__name">GUESS THE WORD!</h1>
       <p class="Choose__name">Your Name is...</p>
       <input type="text" class="name__input" />
-      <p>Select Game Difficulty</p> 
+      <p>Select Game Difficulty</p>
       <select>
         <option class="btn btn__difficulty" id="btn--easy">Easy</option>
         <option class="btn btn__difficulty" id="btn--medium">Medium</option>
@@ -20,7 +20,6 @@
         <option class="btn btn__difficulty" id="btn--devil">Devil</option>
         <button class="btn btn__play">Play</button>
       </select>
-    
     </div>
 
     <div class="pages overview__page" id="page--2">
@@ -29,14 +28,18 @@
       <button class="btn btn__restart">Get Back To Start</button>
     </div>
     <div class="pages play__page" id="page--3">
-      <p class="countdown__timer play__timer" id="timer">Timer</p>
-      <p class="random__words random__words--play" id="random">correct the words</p>
-      <button class="btn btn__restart">Get Back To Start</button>
+      <div class="play__page--top">
+        <p class="countdown__timer play__timer" id="timer">Timer</p>
+        <p class="user__score user__score--play" id="score--1">score</p>
+      </div>
+      <p class="random__words random__words--play" id="random">
+        correct the words
+      </p>
     </div>
 
     <div class="pages end__page" id="page--4">
-        <p class="user__score--end" id="socre--2"></p>
-        <p class="end__massege">Better luck next time</p>
+      <p class="user__score--end" id="socre--2"></p>
+      <p class="end__massege">Better luck next time</p>
       <button class="btn btn__restart">Play again</button>
     </div>
   </body>
