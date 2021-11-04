@@ -1,13 +1,21 @@
 class Button {
     #button;
-    constructor(innerText, id) {
+    constructor(id, className, innerText) {
         this.#button = document.createElement('button');
-        this.#button.classList.add('btn');
+        this.#button.classList.add(className);
         this.#button.innerText = innerText;
         this.#button.id = id;
+        this.#button.addEventListener("click", this.handleClick.bind(this))
     }
-    addEventListener(event, eventListener) {
-        object.addEventListener(event, eventListener);
+
+    get id() {
+        return this.#button.id;
+    }
+
+    handleClick() {
+        console.log(`This is the text in the clicked button: ${this.#button.innerText}`)
     }
 }
+let btn = new Button('test', 't1');
+btn.handleClick();
 module.exports = Button;
