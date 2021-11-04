@@ -1,10 +1,14 @@
-function createDiv(id, description) {
-    let div = document.createElement('div');
-    div.classList.add('step__div');
-    btn.id = id;
-    let text = document.createTextNode(description);
-    div.appendChild(text);
-    document.body.appendChild(div)
+class Div {
+    #div;
+    constructor(id, className) {
+        this.#div = document.createElement('div');
+        this.#div.classList.add(className);
+        this.#div.id = id;
+    }
+
+    get id() {
+        return this.#div.id;
+    }
 }
 
-module.exports = createDiv;
+module.exports = Div;
