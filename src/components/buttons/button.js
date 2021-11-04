@@ -5,7 +5,7 @@ class Button {
         this.#button.classList.add(className);
         this.#button.innerText = innerText;
         this.#button.id = id;
-        this.#button.addEventListener("click", this.handleClick.bind(this))
+        this.#button.addEventListener("click", this.handleClick.bind(this));
     }
 
     get id() {
