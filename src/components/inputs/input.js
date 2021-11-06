@@ -11,6 +11,10 @@ class Input{
     get id() {
         return this.#input.id;
     }
+
+    get build(){        
+        return this.#input;
+    }
 }
 
 module.exports = Input;
