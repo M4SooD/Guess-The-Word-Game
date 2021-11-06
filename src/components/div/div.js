@@ -9,6 +9,10 @@ class Div {
     get id() {
         return this.#div.id;
     }
+
+    get build(){        
+        return this.#div;
+    }
 }
 
 module.exports = Div;
