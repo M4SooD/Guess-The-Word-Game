@@ -1,10 +1,11 @@
 class Input{
     #input;
-    constructor(id,className,type,value){
+    constructor(id,className,type,placeholder,value){
         this.#input = document.createElement("input");
         this.#input.type = type;
-        this.#input.className = className; 
+        this.#input.classList.add(...className); 
         this.#input.id = id;
+        this.#input.placeholder = placeholder;
         this.#input.value = value;
     }
 
