@@ -12,11 +12,4 @@ describe('Test Button component',()=>{
     test('return btn id', () => {
         expect(btn.id).toBe('btn1');
       });
-
-    test('Test click event', () => {
-
-     //btn.simulate(btn.addEventListener('click',btn.handleClick()));
-      expect(btn.handleClick()).toBe('Hello');
-
-    });
 });
