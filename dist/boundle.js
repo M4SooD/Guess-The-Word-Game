@@ -15,7 +15,17 @@
   \******************************************/
 /***/ ((module) => {
 
-eval("class Button {\r\n    #button;\r\n    constructor(id, className, innerText) {\r\n        this.#button = document.createElement('button');\r\n        this.#button.classList.add(className);\r\n        this.#button.innerText = innerText;\r\n        this.#button.id = id;\r\n        this.#button.addEventListener(\"click\", this.handleClick.bind(this));\r\n    }\r\n\r\n    get id() {\r\n        return this.#button.id;\r\n    }\r\n\r\n    handleClick() {\r\n        console.log(`This is the text in the clicked button: ${this.#button.innerText}`)\r\n    }\r\n}\r\nlet btn = new Button('test', 't1');\r\nbtn.handleClick();\r\nmodule.exports = Button;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/buttons/button.js?");
+eval("class Button {\r\n    #button;\r\n    constructor(id, className, innerText) {\r\n        this.#button = document.createElement('button');\r\n        this.#button.classList.add(className);\r\n        this.#button.innerText = innerText;\r\n        this.#button.id = id;\r\n    }\r\n\r\n    get id() {\r\n        return this.#button.id;\r\n    }\r\n\r\n    get build(){        \r\n        return this.#button;\r\n    }\r\n}\r\nmodule.exports = Button;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/buttons/button.js?");
+
+/***/ }),
+
+/***/ "./src/components/buttons/events.js":
+/*!******************************************!*\
+  !*** ./src/components/buttons/events.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const Stepper = __webpack_require__(/*! ../../scripts/stepper-class */ \"./src/scripts/stepper-class.js\");\r\nconst Game = __webpack_require__(/*! ../../scripts/game-class */ \"./src/scripts/game-class.js\");\r\nconst showAndHideContent = __webpack_require__(/*! ../../scripts/showAndHideContent */ \"./src/scripts/showAndHideContent.js\");\r\nconst createStepTwo = __webpack_require__(/*! ../pages/step-two */ \"./src/components/pages/step-two.js\");\r\n\r\nfunction handleClick(selectedValue, userName) {\r\n    const step = new Stepper();\r\n    const currentPage = step.getStep;\r\n    step.setStep = 2;\r\n    const nextPage = step.getStep;\r\n\r\n    const game = new Game(selectedValue.selectedIndex, userName.value);\r\n    showAndHideContent(currentPage, nextPage);\r\n    createStepTwo(game,step);\r\n}\r\n\r\nmodule.exports = handleClick;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/buttons/events.js?");
 
 /***/ }),
 
@@ -25,17 +35,37 @@ eval("class Button {\r\n    #button;\r\n    constructor(id, className, innerText
   \***********************************/
 /***/ ((module) => {
 
-eval("class Div {\r\n    #div;\r\n    constructor(id, className) {\r\n        this.#div = document.createElement('div');\r\n        this.#div.classList.add(className);\r\n        this.#div.id = id;\r\n    }\r\n\r\n    get id() {\r\n        return this.#div.id;\r\n    }\r\n\r\n    get build(){        \r\n        return this.#div;\r\n    }\r\n}\r\n\r\nmodule.exports = Div;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/div/div.js?");
+eval("class Div {\r\n    #div;\r\n    constructor(id, className,hidden) {\r\n        this.#div = document.createElement('div');\r\n        this.#div.classList.add(...className);\r\n        this.#div.id = id;\r\n        this.#div.hidden = hidden;\r\n    }\r\n\r\n    get id() {\r\n        return this.#div.id;\r\n    }\r\n\r\n    get build(){        \r\n        return this.#div;\r\n    }\r\n}\r\n\r\nmodule.exports = Div;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/div/div.js?");
 
 /***/ }),
 
-/***/ "./src/components/dropdown/comboBox.js":
-/*!*********************************************!*\
-  !*** ./src/components/dropdown/comboBox.js ***!
-  \*********************************************/
+/***/ "./src/components/dropdown/combo-box.js":
+/*!**********************************************!*\
+  !*** ./src/components/dropdown/combo-box.js ***!
+  \**********************************************/
 /***/ ((module) => {
 
-eval("class ComboBox {\r\n    #select;\r\n    constructor(id,className,options){\r\n        this.#select = document.createElement('select');\r\n        this.#select.id =  id;\r\n        this.#select.classList.add(className);\r\n        createOptions(options);\r\n    }\r\n    createOptions(arr){\r\n        var ops = new Array(\"first\",\"second\",\"third\",\"fourth\",\"fifth\");\r\n        for (var i=0;i<ops.length;i++) {\r\n            var o = document.createElement(\"option\");\r\n            var t = document.createTextNode(ops[i]);\r\n            o.setAttribute(\"value\",ops[i]);\r\n            o.appendChild(t);\r\n            this.#select.appendChild(o);\r\n            }\r\n        root.appendChild(this.#select);\r\n    }\r\n\r\n    get build(){        \r\n        return this.#select;\r\n    }\r\n}\r\n\r\nmodule.exports = ComboBox;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/dropdown/comboBox.js?");
+eval("class ComboBox {\r\n    #select;\r\n    constructor(id, className, options) {\r\n        this.#select = document.createElement('select');\r\n        this.#select.id = id;\r\n        this.#select.classList.add(...className);\r\n        this.createOptions(options);\r\n    }\r\n    createOptions(arr) {\r\n        const options = [...arr];\r\n        for (let i = 0; i < options.length; i++) {\r\n            let ops = document.createElement(\"option\");\r\n            let text = document.createTextNode(options[i]);\r\n            if (i === 0) {\r\n                ops.setAttribute(\"disabled\", \"\");\r\n                ops.setAttribute(\"selected\", \"\");\r\n                ops.setAttribute(\"hidden\", \"\");\r\n            }\r\n            ops.setAttribute(\"value\", options[i]);\r\n            ops.appendChild(text);\r\n            this.#select.appendChild(ops);\r\n        }\r\n    }\r\n\r\n    get build() {\r\n        return this.#select;\r\n    }\r\n}\r\n\r\nmodule.exports = ComboBox;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/dropdown/combo-box.js?");
+
+/***/ }),
+
+/***/ "./src/components/dropdown/events.js":
+/*!*******************************************!*\
+  !*** ./src/components/dropdown/events.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+eval("function selectionchange(element){\r\n    selectedValue = element.value;\r\n}\r\nmodule.exports = selectionchange;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/dropdown/events.js?");
+
+/***/ }),
+
+/***/ "./src/components/dropdown/list.js":
+/*!*****************************************!*\
+  !*** ./src/components/dropdown/list.js ***!
+  \*****************************************/
+/***/ ((module) => {
+
+eval("class List {\r\n    #ul;\r\n    constructor(id, className, items) {\r\n        this.#ul = document.createElement('ul');\r\n        this.#ul.id = id;\r\n        this.#ul.classList.add(...className);\r\n        this.createItems(items);\r\n    }\r\n\r\n    createItems(arr) {\r\n        const items = [...arr];\r\n        for (let i = 0; i < items.length; i++) {\r\n            let li = document.createElement(\"li\");\r\n            //let text = document.createTextNode(items[i]);\r\n            li.id = 'items' + i;\r\n            li.className = 'items';\r\n            li.innerText = items[i].correctWord;\r\n            //li.appendChild(text);\r\n            this.#ul.appendChild(li);\r\n        }\r\n    }\r\n\r\n    get build() {\r\n        return this.#ul;\r\n    }\r\n}\r\nmodule.exports = List;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/dropdown/list.js?");
 
 /***/ }),
 
@@ -55,17 +85,47 @@ eval("class Heading{\r\n    #heading;\r\n    constructor(type,innerText){\r\n   
   \****************************************/
 /***/ ((module) => {
 
-eval("class Input{\r\n    #input;\r\n    constructor(id,className,type,value){\r\n        this.#input = document.createElement(\"input\");\r\n        this.#input.type = type;\r\n        this.#input.className = className; \r\n        this.#input.id = id;\r\n        this.#input.value = value;\r\n    }\r\n\r\n    get id() {\r\n        return this.#input.id;\r\n    }\r\n\r\n    get build(){        \r\n        return this.#input;\r\n    }\r\n}\r\n\r\nmodule.exports = Input;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/inputs/input.js?");
+eval("class Input{\r\n    #input;\r\n    constructor(id,className,type,placeholder,value){\r\n        this.#input = document.createElement(\"input\");\r\n        this.#input.type = type;\r\n        this.#input.classList.add(...className); \r\n        this.#input.id = id;\r\n        this.#input.placeholder = placeholder;\r\n        this.#input.value = value;\r\n    }\r\n\r\n    get id() {\r\n        return this.#input.id;\r\n    }\r\n\r\n    get build(){        \r\n        return this.#input;\r\n    }\r\n}\r\n\r\nmodule.exports = Input;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/inputs/input.js?");
 
 /***/ }),
 
-/***/ "./src/components/pages/stepOne.js":
-/*!*****************************************!*\
-  !*** ./src/components/pages/stepOne.js ***!
-  \*****************************************/
+/***/ "./src/components/pages/step-four.js":
+/*!*******************************************!*\
+  !*** ./src/components/pages/step-four.js ***!
+  \*******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const Button = __webpack_require__(/*! ../buttons/button */ \"./src/components/buttons/button.js\");\r\nconst Input = __webpack_require__(/*! ../inputs/input */ \"./src/components/inputs/input.js\");\r\nconst Div = __webpack_require__(/*! ../div/div */ \"./src/components/div/div.js\");\r\nconst ComboBox = __webpack_require__(/*! ../dropdown/comboBox */ \"./src/components/dropdown/comboBox.js\");\r\nconst Heading = __webpack_require__(/*! ../heading/heading */ \"./src/components/heading/heading.js\");\r\nconst container = document.getElementById('container');\r\n\r\n\r\ncreateStepOne = () => {\r\n    debugger;\r\n    const stepOne = new Div('stepOne', 'pages C__step-one').build;\r\n    container.appendChild(stepOne);\r\n\r\n    const h1 = new Heading('h1', 'GUESS THE WORD!').build;\r\n    stepOne.appendChild(h1);\r\n\r\n    const name = new Input('name','input name','text','Your Name is...').build;\r\n    stepOne.appendChild(name);\r\n}\r\ncreateStepOne();\r\nmodule.exports = createStepOne;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/pages/stepOne.js?");
+eval("const Button = __webpack_require__(/*! ../buttons/button */ \"./src/components/buttons/button.js\");\r\nconst Input = __webpack_require__(/*! ../inputs/input */ \"./src/components/inputs/input.js\");\r\nconst Div = __webpack_require__(/*! ../div/div */ \"./src/components/div/div.js\");\r\nconst ComboBox = __webpack_require__(/*! ../dropdown/combo-box */ \"./src/components/dropdown/combo-box.js\");\r\nconst Heading = __webpack_require__(/*! ../heading/heading */ \"./src/components/heading/heading.js\");\r\nconst container = document.getElementById('container');\r\n\r\n\r\ncreateStepFour= () => {\r\n    const stepFour = new Div('stepFour', ['pages','step-four'],false).build;\r\n    container.appendChild(stepFour);\r\n\r\n    const h2 = new Heading('h2', 'Display some message base user score').build;\r\n    stepFour.appendChild(h2);\r\n\r\n    const btn = new Button('play_again',['btn'],'Play again').build;\r\n    stepFour.appendChild(btn);\r\n}\r\n\r\nmodule.exports = createStepFour;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/pages/step-four.js?");
+
+/***/ }),
+
+/***/ "./src/components/pages/step-one.js":
+/*!******************************************!*\
+  !*** ./src/components/pages/step-one.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const Button = __webpack_require__(/*! ../buttons/button */ \"./src/components/buttons/button.js\");\r\nconst Input = __webpack_require__(/*! ../inputs/input */ \"./src/components/inputs/input.js\");\r\nconst Div = __webpack_require__(/*! ../div/div */ \"./src/components/div/div.js\");\r\nconst ComboBox = __webpack_require__(/*! ../dropdown/combo-box */ \"./src/components/dropdown/combo-box.js\");\r\nconst Heading = __webpack_require__(/*! ../heading/heading */ \"./src/components/heading/heading.js\");\r\nconst selectionchange = __webpack_require__(/*! ../dropdown/events */ \"./src/components/dropdown/events.js\");\r\nconst handleClick= __webpack_require__(/*! ../buttons/events */ \"./src/components/buttons/events.js\");\r\nconst container = document.getElementById('container');\r\n\r\ncreateStepOne = () => {\r\n    const stepOne = new Div('stepOne', ['pages','step-one'],false).build;\r\n    container.appendChild(stepOne);\r\n\r\n    const h1 = new Heading('h1', 'GUESS THE WORD!').build;\r\n    stepOne.appendChild(h1);\r\n\r\n    const userName = new Input('userName',['step-one__input'],'text','Your Name is...', null).build;\r\n    stepOne.appendChild(userName);\r\n\r\n    const options =[\"Choose Game Level...\",\"Easy\",\"Medium\",\"Hard\",\"Devil\"];\r\n    const gameLevel = new ComboBox('name',['step-one__dropdown'],options).build;\r\n    stepOne.appendChild(gameLevel);\r\n    gameLevel.onchange = () => selectionchange(gameLevel);\r\n\r\n    const btnStart = new Button('start',['btn'],'Start').build;\r\n    stepOne.appendChild(btnStart);\r\n    btnStart.onclick = () => handleClick(gameLevel,userName);\r\n}\r\n\r\ncreateStepOne();\r\nmodule.exports = createStepOne;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/pages/step-one.js?");
+
+/***/ }),
+
+/***/ "./src/components/pages/step-three.js":
+/*!********************************************!*\
+  !*** ./src/components/pages/step-three.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const Button = __webpack_require__(/*! ../buttons/button */ \"./src/components/buttons/button.js\");\r\nconst Div = __webpack_require__(/*! ../div/div */ \"./src/components/div/div.js\");\r\nconst Heading = __webpack_require__(/*! ../heading/heading */ \"./src/components/heading/heading.js\");\r\nconst container = document.getElementById('container');\r\n\r\n\r\ncreateStepThree = () => {\r\n    const stepThree = new Div('stepThree', ['pages','step-three'],false).build;\r\n    container.appendChild(stepThree);\r\n\r\n    const h2 = new Heading('h2', 'Remember the words..').build;\r\n    stepThree.appendChild(h2);\r\n\r\n\r\n\r\n    const btn = new Button('backToMainPage',['btn'],'Back').build;\r\n    stepThree.appendChild(btn);\r\n\r\n}\r\n\r\nmodule.exports = createStepThree;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/pages/step-three.js?");
+
+/***/ }),
+
+/***/ "./src/components/pages/step-two.js":
+/*!******************************************!*\
+  !*** ./src/components/pages/step-two.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const Button = __webpack_require__(/*! ../buttons/button */ \"./src/components/buttons/button.js\");\r\nconst Div = __webpack_require__(/*! ../div/div */ \"./src/components/div/div.js\");\r\nconst Heading = __webpack_require__(/*! ../heading/heading */ \"./src/components/heading/heading.js\");\r\nconst List = __webpack_require__(/*! ../dropdown/list */ \"./src/components/dropdown/list.js\");\r\nconst Timer = __webpack_require__(/*! ../../scripts/timer-class */ \"./src/scripts/timer-class.js\");\r\nconst showAndHideContent = __webpack_require__(/*! ../../scripts/showAndHideContent */ \"./src/scripts/showAndHideContent.js\");\r\nconst createStepThree = __webpack_require__(/*! ../pages/step-three */ \"./src/components/pages/step-three.js\");\r\nconst container = document.getElementById('container');\r\n\r\ncreateStepTwo = (gameInfo, stepper) => {\r\n    const stepTwo = new Div('stepTwo', ['pages', 'step-two'], false).build;\r\n    container.appendChild(stepTwo);\r\n\r\n    const h2 = new Heading('h2', 'Remember the words..').build;\r\n    stepTwo.appendChild(h2);\r\n\r\n    const progress = document.createElement('progress');\r\n    progress.id = 'progressBar';\r\n    progress.value = \"0\"; \r\n    progress.max = \"10\";\r\n    stepTwo.appendChild(progress);\r\n\r\n    const game = gameInfo;\r\n    const wordList = new List('correctWordList', ['list'], game.generateWords()).build;\r\n    stepTwo.appendChild(wordList);\r\n\r\n    const btn = new Button('backToMainPage', ['btn'], 'Back').build;\r\n    stepTwo.appendChild(btn);\r\n\r\n    const timer = new Timer(game.gameDuration);\r\n   startTime(timer);\r\n  }\r\n  function startTime(timer){\r\n   debugger;\r\n    \r\n   let x =setInterval( timer.downloadTimer(), 1000);\r\n   debugger;\r\n   if(x<=0){\r\n      debugger;\r\n      const currentPage = stepper.getStep;\r\n      stepper.setStep = 3;\r\n      const nextPage = stepper.getStep;\r\n  \r\n      showAndHideContent(currentPage, nextPage);\r\n      createStepThree(game,stepper);\r\n   }\r\n  }\r\n\r\nmodule.exports = createStepTwo;\n\n//# sourceURL=webpack://guess-the-word-game/./src/components/pages/step-two.js?");
 
 /***/ }),
 
@@ -75,7 +135,7 @@ eval("const Button = __webpack_require__(/*! ../buttons/button */ \"./src/compon
   \*********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const Button = __webpack_require__(/*! ./components/buttons/button */ \"./src/components/buttons/button.js\");\r\nconst Div = __webpack_require__(/*! ./components/div/div */ \"./src/components/div/div.js\");\r\nconst Input = __webpack_require__(/*! ./components/inputs/input */ \"./src/components/inputs/input.js\");\r\nconst ComboBox = __webpack_require__(/*! ./components/dropdown/comboBox */ \"./src/components/dropdown/comboBox.js\");\r\nconst Heading = __webpack_require__(/*! ./components/heading/heading */ \"./src/components/heading/heading.js\");\r\nconst Page = __webpack_require__(/*! ./components/pages/stepOne */ \"./src/components/pages/stepOne.js\");\r\nconst WordsFactory = __webpack_require__(/*! ./scripts/words-factory-class */ \"./src/scripts/words-factory-class.js\");\r\nconst Word = __webpack_require__(/*! ./scripts/word-class */ \"./src/scripts/word-class.js\");\r\nconst Game = __webpack_require__(/*! ./scripts/game-class */ \"./src/scripts/game-class.js\");\r\n\n\n//# sourceURL=webpack://guess-the-word-game/./src/main.js?");
+eval("const Button = __webpack_require__(/*! ./components/buttons/button */ \"./src/components/buttons/button.js\");\r\nconst Div = __webpack_require__(/*! ./components/div/div */ \"./src/components/div/div.js\");\r\nconst Input = __webpack_require__(/*! ./components/inputs/input */ \"./src/components/inputs/input.js\");\r\nconst ComboBox = __webpack_require__(/*! ./components/dropdown/combo-box */ \"./src/components/dropdown/combo-box.js\");\r\nconst Heading = __webpack_require__(/*! ./components/heading/heading */ \"./src/components/heading/heading.js\");\r\nconst PageOne = __webpack_require__(/*! ./components/pages/step-one */ \"./src/components/pages/step-one.js\");\r\nconst PageTwo = __webpack_require__(/*! ./components/pages/step-two */ \"./src/components/pages/step-two.js\");\r\nconst PageThree = __webpack_require__(/*! ./components/pages/step-three */ \"./src/components/pages/step-three.js\");\r\nconst PageFour = __webpack_require__(/*! ./components/pages/step-four */ \"./src/components/pages/step-four.js\");\r\n\r\nconst WordsFactory = __webpack_require__(/*! ./scripts/words-factory-class */ \"./src/scripts/words-factory-class.js\");\r\nconst Word = __webpack_require__(/*! ./scripts/word-class */ \"./src/scripts/word-class.js\");\r\nconst Game = __webpack_require__(/*! ./scripts/game-class */ \"./src/scripts/game-class.js\");\r\n\r\nconst btnEvents = __webpack_require__(/*! ./components/buttons/events */ \"./src/components/buttons/events.js\");\r\nconst cmbEvents = __webpack_require__(/*! ./components/dropdown/events */ \"./src/components/dropdown/events.js\");\r\n\n\n//# sourceURL=webpack://guess-the-word-game/./src/main.js?");
 
 /***/ }),
 
@@ -85,7 +145,37 @@ eval("const Button = __webpack_require__(/*! ./components/buttons/button */ \"./
   \***********************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const WordsFactory = __webpack_require__(/*! ./words-factory-class */ \"./src/scripts/words-factory-class.js\");\r\nconst Word = __webpack_require__(/*! ./word-class */ \"./src/scripts/word-class.js\");\r\n\r\nclass Game{\r\n    #words =[];\r\n    #totalScore;\r\n    #currentStepper;\r\n    #numberWords;\r\n    #score;\r\n    #timer;\r\n    constructor(gameLevel) {\r\n        this.level = gameLevel;\r\n        if(this.level ===\"Easy\"){\r\n            this.#numberWords = 5;\r\n            this.#score = 2;\r\n            this.#timer=30;\r\n        }\r\n        else if(this.level ===\"Medium\"){\r\n            this.#numberWords = 7;\r\n            this.#score = 5;\r\n            this.#timer=40;\r\n        }\r\n        else if(this.level ===\"Hard\"){\r\n            this.#numberWords = 9;\r\n            this.#score = 10;\r\n            this.#timer=70;\r\n        }\r\n        else if(this.level ===\"Devil\"){\r\n            this.#numberWords = 11;\r\n            this.#score = 20;\r\n            this.#timer=120;\r\n        }\r\n    }\r\n\r\n    generateWords(){\r\n        const wordsFactory = new WordsFactory(this.#numberWords);\r\n        do {\r\n            let obj = wordsFactory.generateWord;\r\n            if (!this.#words.includes(obj.correct)) {\r\n                this.#words.push(obj);\r\n            }\r\n        } while (this.#words.length < this.#numberWords);\r\n        return this.#words;\r\n    }\r\n\r\n\r\n/*\r\n    CheckInputCharacters(){\r\n        for(let i =0;i<this.#words.numberHiddenCharacters;i++){\r\n\r\n        }\r\n    }*/\r\n}\r\n\r\nlet myGame = new Game(\"Easy\");\r\nconsole.log(myGame.generateWords());\r\n\r\nmodule.exports = Game;\n\n//# sourceURL=webpack://guess-the-word-game/./src/scripts/game-class.js?");
+eval("const WordsFactory = __webpack_require__(/*! ./words-factory-class */ \"./src/scripts/words-factory-class.js\");\r\nconst Word = __webpack_require__(/*! ./word-class */ \"./src/scripts/word-class.js\");\r\n\r\nclass Game{\r\n    words =[];\r\n    #totalScore;\r\n    #currentStepper;\r\n    #numberWords;\r\n    #score;\r\n    #timer;\r\n    constructor(gameLevel,userName) {\r\n        this.level = gameLevel;\r\n        if(this.level ===1){\r\n            this.#numberWords = 5;\r\n            this.#score = 2;\r\n            this.#timer=30;\r\n        }\r\n        else if(this.level ===2){\r\n            this.#numberWords = 7;\r\n            this.#score = 5;\r\n            this.#timer=40;\r\n        }\r\n        else if(this.level ===3){\r\n            this.#numberWords = 9;\r\n            this.#score = 10;\r\n            this.#timer=70;\r\n        }\r\n        else if(this.level ===4){\r\n            this.#numberWords = 11;\r\n            this.#score = 20;\r\n            this.#timer=120;\r\n        }\r\n    }\r\n\r\n    generateWords(){\r\n        const wordsFactory = new WordsFactory(this.#numberWords);\r\n        do {\r\n            let obj = wordsFactory.generateWord;\r\n            if (!this.words.includes(obj.correct)) {\r\n                this.words.push(obj);\r\n            }\r\n        } while (this.words.length < this.#numberWords);\r\n        return this.words;\r\n    }\r\n\r\n    get gameDuration(){\r\n        return this.#timer;\r\n    }\r\n\r\n/*\r\n    CheckInputCharacters(){\r\n        for(let i =0;i<this.#words.numberHiddenCharacters;i++){\r\n\r\n        }\r\n    }*/\r\n}\r\n\r\nmodule.exports = Game;\n\n//# sourceURL=webpack://guess-the-word-game/./src/scripts/game-class.js?");
+
+/***/ }),
+
+/***/ "./src/scripts/showAndHideContent.js":
+/*!*******************************************!*\
+  !*** ./src/scripts/showAndHideContent.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+eval("function showAndHideContent(currentPage, nextPage) {\r\n    if (document.getElementById(currentPage) !== null && document.getElementById(nextPage) !== null) {\r\n        document.getElementById(currentPage).hidden = true;\r\n        document.getElementById(nextPage).hidden = false;\r\n    }\r\n    else {\r\n        document.getElementById(currentPage).hidden = true;\r\n    }\r\n}\r\n\r\nmodule.exports = showAndHideContent;\n\n//# sourceURL=webpack://guess-the-word-game/./src/scripts/showAndHideContent.js?");
+
+/***/ }),
+
+/***/ "./src/scripts/stepper-class.js":
+/*!**************************************!*\
+  !*** ./src/scripts/stepper-class.js ***!
+  \**************************************/
+/***/ ((module) => {
+
+eval("class Stepper {\r\n    #steps = ['stepOne','stepTwo','stepThree','stepFour'];\r\n    #currentStep = this.#steps[0];\r\n\r\n    set setStep(step) {\r\n        this.#currentStep = this.#steps[step-1];\r\n    }\r\n    get getStep() {\r\n        return this.#currentStep;\r\n    }\r\n}\r\n\r\nmodule.exports = Stepper;\n\n//# sourceURL=webpack://guess-the-word-game/./src/scripts/stepper-class.js?");
+
+/***/ }),
+
+/***/ "./src/scripts/timer-class.js":
+/*!************************************!*\
+  !*** ./src/scripts/timer-class.js ***!
+  \************************************/
+/***/ ((module) => {
+
+eval("class Timer {\r\n    #time;\r\n    #timer; //10 will  run it every 100th of a second\r\n\r\n    constructor(time) {\r\n        this.#time = time;\r\n\r\n    }\r\n\r\n    set timer(time) {\r\n        this.#time = time;\r\n    }\r\n\r\n    downloadTimer() {\r\n        if(this.#time <= 0){\r\n           return 0;\r\n          }\r\n          document.getElementById(\"progressBar\").value = 10 - this.#time;\r\n          this.#time -= 1;\r\n    }\r\n\r\n    RemainingTime() {\r\n\r\n    }\r\n\r\n    memorizingTimer() {\r\n\r\n    }\r\n\r\n    responseTime() {\r\n\r\n    }\r\n}\r\n\r\nmodule.exports = Timer;\n\n//# sourceURL=webpack://guess-the-word-game/./src/scripts/timer-class.js?");
 
 /***/ }),
 
@@ -95,7 +185,7 @@ eval("const WordsFactory = __webpack_require__(/*! ./words-factory-class */ \"./
   \***********************************/
 /***/ ((module) => {
 
-eval("class Word {\r\n    #word ={};\r\n    #numberHiddenCharacters;\r\n    #score;\r\n    constructor(words) {\r\n       // this.#score = score;\r\n        this.#word.correct= words[Math.floor(Math.random()*words.length)] ;\r\n        this.#word.hiddenCharacters = this.randomHide(this.#word.correct);\r\n    }\r\n\r\n    get generateWord(){\r\n        return this.#word;\r\n    }\r\n\r\n    randomHide(word) {\r\n        let text = [...word];\r\n        this.#word.hiddenCharacters=[];\r\n        this.#numberHiddenCharacters = Math.floor(text.length * 0.4) ;\r\n        for (let i= 0; i<this.#numberHiddenCharacters;i++){\r\n            this.#word.hiddenCharacters.push(text[Math.floor(Math.random()*text.length)]);\r\n        }\r\n        return this.#word.hiddenCharacters;\r\n    }\r\n/*\r\n    get score(){\r\n        return this.#score * this.#numberHiddenCharacters;\r\n    }\r\n*/\r\n    userTry(characters){\r\n        let inputUser= [...characters];\r\n        let withHidden = this.#word.hiddenCharacters;\r\n        if (inputUser.length === withHidden.length && inputUser.every((value, i) => value === withHidden[i])){\r\n            return  10;\r\n        }\r\n        else\r\n            return 0;\r\n    }\r\n}\r\n\r\nmodule.exports = Word;\n\n//# sourceURL=webpack://guess-the-word-game/./src/scripts/word-class.js?");
+eval("class Word {\r\n    #word ={};\r\n    #numberHiddenCharacters;\r\n    #score;\r\n    constructor(words) {\r\n       // this.#score = score;\r\n        this.#word.correct= words[Math.floor(Math.random()*words.length)] ;\r\n        this.#word.hiddenCharacters = this.randomHide(this.#word.correct);\r\n    }\r\n\r\n    get generateWord(){\r\n        return this.#word;\r\n    }\r\n\r\n    get correctWord(){\r\n        return this.#word.correct;\r\n    }\r\n    randomHide(word) {\r\n        let text = [...word];\r\n        this.#word.hiddenCharacters=[];\r\n        this.#numberHiddenCharacters = Math.floor(text.length * 0.4) ;\r\n        for (let i= 0; i<this.#numberHiddenCharacters;i++){\r\n            this.#word.hiddenCharacters.push(text[Math.floor(Math.random()*text.length)]);\r\n        }\r\n        return this.#word.hiddenCharacters;\r\n    }\r\n/*\r\n    get score(){\r\n        return this.#score * this.#numberHiddenCharacters;\r\n    }\r\n*/\r\n    userTry(characters){\r\n        let inputUser= [...characters];\r\n        let withHidden = this.#word.hiddenCharacters;\r\n        if (inputUser.length === withHidden.length && inputUser.every((value, i) => value === withHidden[i])){\r\n            return  10;\r\n        }\r\n        else\r\n            return 0;\r\n    }\r\n}\r\n\r\nmodule.exports = Word;\n\n//# sourceURL=webpack://guess-the-word-game/./src/scripts/word-class.js?");
 
 /***/ }),
 
