@@ -11,11 +11,9 @@ class List {
         const items = [...arr];
         for (let i = 0; i < items.length; i++) {
             let li = document.createElement("li");
-            //let text = document.createTextNode(items[i]);
             li.id = this.#ul.id +'-items' + i;
             li.className = 'items';
             li.innerText = items[i].correctWord;
-            //li.appendChild(text);
             this.#ul.appendChild(li);
         }
     }
