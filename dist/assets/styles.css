@@ -78,6 +78,9 @@ h2,.timer {
   color: rgb(212, 231, 236);
   padding: 1rem;
 }
+.input-char{
+  width: 16px;
+}
 #stepOne[hidden]{display: none;}
 #stepTwo[hidden]{display: none;}
 #stepThree[hidden]{display: none;}
