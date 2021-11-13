@@ -13,7 +13,6 @@ class Word {
     }
 
     get indexHiddenCharacters(){
-        debugger;
         return this.word.indexHiddenCharacters;
     }
 
