@@ -4,6 +4,7 @@ const Word = require("./word-class");
 
 class Game{
     words =[];
+    destructedWords=[];
     #totalScore;
     #currentStepper;
     #numberWords;
@@ -42,17 +43,22 @@ class Game{
             }
         } while (this.words.length < this.#numberWords);
     }
+    
     generateDestructedWord(){
         const array = this.words;
-        debugger;
+        let correctWord=[];
         for (let i = 0; i < array.length; i++) {
-            let box = this.array[i].word.indexHiddenCharacters;
-            let correctWord = this.array[i].word.correctWord;
-            
-            const input = new Input('val','input',text,null,null);
-            
+            let box = array[i].word.indexHiddenCharacters;
+            let testID= document.getElementById('wrongWordsList-items' + i);
+             correctWord = array[i].word.correct.split("");
+            for (let j = 0; j < box.length; j++) {
+                const input = new Input('val'+i+j,['input-char'],'text','','').build;
+                testID.appendChild(input);
+                correctWord.splice(box[j], 1,input);
+                correctWord = correctWord;
+            }        
+            array[i].word.correct = correctWord.join("");
         }
-        return this.words;
     }
 
     get gameVocabularyList(){
