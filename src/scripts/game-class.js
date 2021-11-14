@@ -51,10 +51,13 @@ class Game{
             let box = array[i].word.indexHiddenCharacters;
             let testID= document.getElementById('wrongWordsList-items' + i);
              correctWord = array[i].word.correct.split("");
+             debugger;
             for (let j = 0; j < box.length; j++) {
-                const input = new Input('val'+i+j,['input-char'],'text','','').build;
-                testID.appendChild(input);
-                correctWord.splice(box[j], 1,input);
+                //const input = new Input('val'+i+j,['input-char'],'text','','').build;
+                //testID.appendChild(input);
+
+                correctWord.slice(0,box[j]);
+                testID.insertAdjacentHTML("afterbegin" ,'<input type="text" class="input-char" required maxlength="1">');
                 correctWord = correctWord;
             }        
             array[i].word.correct = correctWord.join("");
