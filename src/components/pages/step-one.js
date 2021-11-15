@@ -14,7 +14,7 @@ createStepOne = () => {
     const h1 = new Heading('h1', 'GUESS THE WORD!').build;
     stepOne.appendChild(h1);
 
-    const userName = new Input('userName',['step-one__input'],'text','Your Name is...', null).build;
+    const userName = new Input('userName',['step-one__input'],'text','Your Name is...', null,3,30).build;
     stepOne.appendChild(userName);
 
     const options =["Choose Game Level...","Easy","Medium","Hard","Devil"];

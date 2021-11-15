@@ -18,7 +18,7 @@ createStepThree = (gameInfo, stepper) => {
     const progress = new Progress('progressBar3', '0', game.stepThreeDuration - 1).build;
     stepThree.appendChild(progress);
 
-    const wordList = new List('wrongWordsList', ['list'], game.gameVocabularyList).build;
+    const wordList = new List('wrongWordsList', ['list'], game.gameVocabularyList,true).build;
     stepThree.appendChild(wordList);
     game.generateDestructedWord();
 
