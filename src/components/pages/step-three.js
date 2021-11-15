@@ -5,7 +5,7 @@ const Heading = require('../heading/heading');
 const Timer = require('../../scripts/timer-class');
 const List = require('../dropdown/list');
 const container = document.getElementById('container');
-
+const listenToInputFocus = require('../inputs/event');
 
 createStepThree = (gameInfo, stepper) => {
     const game = gameInfo;
@@ -25,8 +25,13 @@ createStepThree = (gameInfo, stepper) => {
     const btn = new Button('backToMainPage', ['btn'], 'Back').build;
     stepThree.appendChild(btn);
 
+    const inputs = document.querySelectorAll("input.input-char");
+    listenToInputFocus(inputs);
+    inputs[0].focus();
+    
     const timer = new Timer(game.stepThreeDuration);
     setInterval(() => timer.downloadTimer('progressBar3', game, stepper), 1000);
 }
+
 
 module.exports = createStepThree;
