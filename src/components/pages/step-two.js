@@ -19,14 +19,14 @@ createStepTwo = (gameInfo, stepper) => {
    stepTwo.appendChild(progress);
 
    game.generateWords();
-   const wordList = new List('correctWordList', ['list'], game.gameVocabularyList).build;
+   const wordList = new List('correctWordList', ['list'], game.gameVocabularyList, false).build;
    stepTwo.appendChild(wordList);
 
    const btn = new Button('backToMainPage', ['btn'], 'Back').build;
    stepTwo.appendChild(btn);
 
    const timer = new Timer(game.stepTwoDuration);
-   setInterval(() => timer.downloadTimer('progressBar2',game, stepper), 1000);
+   setInterval(() => timer.downloadTimer('progressBar2', game, stepper), 1000);
 }
 
 module.exports = createStepTwo;
